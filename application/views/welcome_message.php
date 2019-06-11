@@ -111,7 +111,8 @@ $(function() {
           	data: function(params) {
 				return {
 					q: params.term, // search term
-					page: params.page
+					page: params.page,
+					limit: 10
 				};
           	},
           	processResults: (data, params) => {
@@ -119,7 +120,7 @@ $(function() {
 				return {
 					results: data.items,
 					pagination: {
-						more: params.page * 10 < data.total_count
+						more: params.page * data.limit < data.total_count
 					}
 				};
 		  	},

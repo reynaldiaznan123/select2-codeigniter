@@ -27,7 +27,7 @@ class Welcome extends CI_Controller {
 		$q = $this->input->post_get('q');
 		$start = (int) $this->input->post_get('page');
 		$start = $start ? $start - 1 : 0;
-		$limit = 10;
+		$limit = (int) $this->input->post_get('limit');
 
 		$count = $this->mahasiswa_count($q);
 		$data = $this->mahasiswa_data($start, $limit, $q);
@@ -37,7 +37,7 @@ class Welcome extends CI_Controller {
 			$options[] = ['id' => $row->id, 'text' => $row->nama];
 		}
 
-		exit(json_encode(['items' => $options, 'total_count' => $count]));
+		exit(json_encode(['items' => $options, 'limit' => $limit, 'total_count' => $count]));
 	}
 
 	private function mahasiswa_count($q = null) {
